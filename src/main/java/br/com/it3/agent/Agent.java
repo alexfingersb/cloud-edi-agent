@@ -18,6 +18,4 @@ public class Agent {
 		System.out.println("Finalizando agent");
 		
 	}
-	
-	
 }
