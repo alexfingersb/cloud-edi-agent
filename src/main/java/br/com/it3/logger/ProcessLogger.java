@@ -17,14 +17,18 @@ import br.com.it3.websocket.WebsocketClientEndpoint;
 public class ProcessLogger implements Processor {
 	
 	static URI endpoint;
+	static String IP = "192.168.56.1";
+	static String PORT = "8080";
+	
 	static WebsocketClientEndpoint ws;
 	
 	static {
 		try {
-			endpoint = new URI("ws://localhost:8080/cloud-edi-web/message");
+			endpoint = new URI("ws://" + IP + ":" + PORT + "/cloud-edi-web/message");
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
+		System.out.println("Connect with endpoint at " + IP + ":" + PORT);
 		ws = new WebsocketClientEndpoint(endpoint);
 	}
 	 
@@ -32,7 +36,7 @@ public class ProcessLogger implements Processor {
 	@Override
 	public void process(Exchange exchange) {
 		try {
-			System.out.println("[onprocess] Processando transferencia do arquivo " + exchange.getIn().getHeader("CamelFileNameProduced"));
+			System.out.println("[onprocess] Processando transferencia do arquivo " + exchange.getIn().getHeader("CamelFileName"));
 			processMessage(exchange);
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -50,7 +54,7 @@ public class ProcessLogger implements Processor {
 			System.out.println("[" + exchange.getFromRouteId() + "] file in=" + file.getAbsolutePath());
 		}
 
-		Object hash = exchange.getIn().getHeader("crc");
+		Object hash = exchange.getIn().getHeader("hash");
 			
 		if (file != null && file.exists()) {
 			try {

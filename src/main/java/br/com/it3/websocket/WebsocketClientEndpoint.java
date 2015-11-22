@@ -28,13 +28,13 @@ public class WebsocketClientEndpoint {
 
     @OnOpen
     public void onOpen(Session session) {
-        System.out.println("opening websocket");
+        System.out.println("opening connection with server");
         this.session = session;
     }
 
     @OnClose
     public void onClose(Session userSession, CloseReason reason) {
-        System.out.println("closing websocket");
+        System.out.println("closing websocket connection");
         this.session = null;
     }
 

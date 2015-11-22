@@ -18,4 +18,8 @@ public class Agent {
 		System.out.println("Finalizando agent");
 		
 	}
+	
+	public static void stop() {
+		System.out.println("Stopping agente....");
+	}
 }
